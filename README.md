@@ -4,6 +4,8 @@
 
 :fire: Uses the C API for blazing performance
 
+[![Build Status](https://travis-ci.org/ankane/vowpalwabbit.svg?branch=master)](https://travis-ci.org/ankane/vowpalwabbit)
+
 ## Installation
 
 First, [install Vowpal Wabbit](https://vowpalwabbit.org/start.html). For Homebrew, use:
