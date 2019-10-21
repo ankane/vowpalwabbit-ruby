@@ -8,7 +8,7 @@
 
 ## Installation
 
-First, [install Vowpal Wabbit](https://vowpalwabbit.org/start.html). For Homebrew, use:
+First, install the [Vowpal Wabbit C++ library](https://vowpalwabbit.org/start.html). For Homebrew, use:
 
 ```sh
 brew install vowpal-wabbit
