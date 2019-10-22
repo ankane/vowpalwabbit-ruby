@@ -4,7 +4,7 @@
 
 :fire: Uses the C API for blazing performance
 
-[![Build Status](https://travis-ci.org/ankane/vowpalwabbit.svg?branch=master)](https://travis-ci.org/ankane/vowpalwabbit)
+[![Build Status](https://travis-ci.org/ankane/vowpalwabbit.svg?branch=master)](https://travis-ci.org/ankane/vowpalwabbit) [![Build status](https://ci.appveyor.com/api/projects/status/wwf44js0tnx52xwv/branch/master?svg=true)](https://ci.appveyor.com/project/ankane/vowpalwabbit/branch/master)
 
 ## Installation
 
