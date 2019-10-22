@@ -5,6 +5,9 @@ environment:
 install:
   - git clone --recursive https://github.com/VowpalWabbit/vowpal_wabbit.git
   - cd vowpal_wabbit/vowpalwabbit
+  - cd C:\Tools\vcpkg
+  - git pull
+  - .\bootstrap-vcpkg.bat
   - vcpkg install zlib:x64-windows
   - vcpkg install boost-system:x64-windows
   - vcpkg install boost-program-options:x64-windows
@@ -16,7 +19,7 @@ install:
   - vcpkg install boost-thread:x64-windows
   - mkdir build
   - cd build
-  - cmake .. -DCMAKE_TOOLCHAIN_FILE=<vcpkg_root>\scripts\buildsystems\vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows
+  - cmake .. -DCMAKE_TOOLCHAIN_FILE=C:\Tools\vcpkg\scripts\buildsystems\vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows
   - .\vowpal_wabbit.sln
   - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\projects\vowpalwabbit\vowpal_wabbit\build\vowpalwabbit;%PATH%
   - bundle install
