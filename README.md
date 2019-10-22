@@ -113,6 +113,7 @@ Or a path to a file
 
 ```ruby
 model.fit("train.txt")
+model.partial_fit("train.txt")
 model.predict("train.txt")
 model.score("train.txt")
 ```
