@@ -32,7 +32,7 @@ y = [1, 2, 3, 4]
 Train a model
 
 ```ruby
-model = VowpalWabbit::Regressor.new(l: 100)
+model = VowpalWabbit::Regressor.new(learning_rate: 100)
 model.fit(x, y)
 ```
 

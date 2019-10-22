@@ -5,7 +5,7 @@ class VowpalWabbitTest < Minitest::Test
     x = [[1, 2], [3, 4], [5, 6], [7, 8]]
     y = [1, 2, 3, 4]
 
-    model = VowpalWabbit::Regressor.new(l: 100)
+    model = VowpalWabbit::Regressor.new(learning_rate: 100)
     assert_nil model.fit(x, y)
 
     tempfile = Tempfile.new("vowpal-wabbit")
@@ -22,7 +22,7 @@ class VowpalWabbitTest < Minitest::Test
     x = [[1, 2], [3, 4], [5, 6], [7, 8]]
     y = [-1, -1, 1, 1]
 
-    model = VowpalWabbit::Classifier.new(loss_function: "logistic", l: 0.01, l2: 0.1)
+    model = VowpalWabbit::Classifier.new(loss_function: "logistic", learning_rate: 0.01, l2: 0.1)
     assert_nil model.fit(x, y)
 
     tempfile = Tempfile.new("vowpal-wabbit")
@@ -35,7 +35,7 @@ class VowpalWabbitTest < Minitest::Test
   end
 
   def test_regressor_file
-    model = VowpalWabbit::Regressor.new(l: 100)
+    model = VowpalWabbit::Regressor.new(learning_rate: 100)
     assert_nil model.fit("test/support/regressor.txt")
     assert_in_delta 0.3333333432674408, model.intercept
     assert_equal [1.0, 2.0, 3.0, 4.0], model.predict("test/support/regressor.txt")
@@ -43,7 +43,7 @@ class VowpalWabbitTest < Minitest::Test
   end
 
   def test_classifier_file
-    model = VowpalWabbit::Classifier.new(loss_function: "logistic", l: 0.01, l2: 0.1)
+    model = VowpalWabbit::Classifier.new(loss_function: "logistic", learning_rate: 0.01, l2: 0.1)
     assert_nil model.fit("test/support/classifier.txt")
     assert_equal [-1, -1, -1, -1], model.predict("test/support/classifier.txt")
     assert_equal 0.5, model.score("test/support/classifier.txt")
