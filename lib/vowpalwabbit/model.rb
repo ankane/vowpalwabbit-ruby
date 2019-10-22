@@ -125,7 +125,11 @@ module VowpalWabbit
           yield line
         end
       else
-        raise ArgumentError, "x and y must have same size" if y && x.size != y.size
+        x = x.to_a
+        if y
+          y = y.to_a
+          raise ArgumentError, "x and y must have same size" if x.size != y.size
+        end
 
         x.zip(y || []) do |xi, yi|
           if xi.is_a?(String)

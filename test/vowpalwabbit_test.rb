@@ -69,6 +69,17 @@ class VowpalWabbitTest < Minitest::Test
     assert_equal [3.0, 3.0, 3.0, 3.0], model.predict(x_test)
   end
 
+  def test_numo
+    x = Numo::DFloat.cast([[1, 2], [3, 4], [5, 6], [7, 8]])
+    y = Numo::DFloat.cast([1, 2, 3, 4])
+
+    model = VowpalWabbit::Regressor.new(l: 100)
+    assert_nil model.fit(x, y)
+    assert_in_delta 0.3333333432674408, model.intercept
+    assert_equal [1.0, 2.0, 3.0, 4.0], model.predict(x)
+    assert_equal 1.0, model.score(x, y)
+  end
+
   def test_bad_params
     error = assert_raises ArgumentError do
       VowpalWabbit::Model.new(cb: "4 hello").fit([""])
