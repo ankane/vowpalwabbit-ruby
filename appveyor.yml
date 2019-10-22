@@ -3,11 +3,10 @@ environment:
     - RUBY_VERSION: "25-x64"
 
 install:
-  - pwd
   - git clone --recursive https://github.com/VowpalWabbit/vowpal_wabbit.git
-  - cd vowpal_wabbit
+  - cd vowpal_wabbit/vowpalwabbit
   - msbuild /p:Configuration="Release" /p:Platform="x64" vw.sln
-  - set PATH=C:\Ruby%RUBY_VERSION%\bin;\vowpalwabbit\out\target\Release\x64;%PATH%
+  - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\projects\vowpalwabbit\vowpal_wabbit\vowpalwabbit\out\target\Release\x64;%PATH%
   - bundle install
 
 build: off
