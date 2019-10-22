@@ -78,6 +78,8 @@ class VowpalWabbitTest < Minitest::Test
   end
 
   def test_numo
+    skip
+
     x = Numo::DFloat.cast([[1, 2], [3, 4], [5, 6], [7, 8]])
     y = Numo::DFloat.cast([1, 2, 3, 4])
 
