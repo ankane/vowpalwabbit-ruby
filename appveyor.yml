@@ -3,8 +3,6 @@ environment:
     - RUBY_VERSION: "25-x64"
 
 install:
-  - git clone --recursive https://github.com/VowpalWabbit/vowpal_wabbit.git
-  - cd vowpal_wabbit/vowpalwabbit
   - cd C:\Tools\vcpkg
   - git pull
   - .\bootstrap-vcpkg.bat
@@ -17,6 +15,9 @@ install:
   - vcpkg install boost-python:x64-windows
   - vcpkg install boost-math:x64-windows
   - vcpkg install boost-thread:x64-windows
+  - cd C:\projects\vowpalwabbit
+  - git clone --recursive https://github.com/VowpalWabbit/vowpal_wabbit.git
+  - cd vowpal_wabbit\vowpalwabbit
   - mkdir build
   - cd build
   - cmake .. -DCMAKE_TOOLCHAIN_FILE=C:\Tools\vcpkg\scripts\buildsystems\vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows
