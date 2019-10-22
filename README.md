@@ -117,6 +117,8 @@ model.predict("train.txt")
 model.score("train.txt")
 ```
 
+Files can be compressed [master]
+
 Read more about the [input format](https://github.com/VowpalWabbit/vowpal_wabbit/wiki/Input-format)
 
 ## History

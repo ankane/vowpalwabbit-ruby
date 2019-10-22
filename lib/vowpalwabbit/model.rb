@@ -51,7 +51,7 @@ module VowpalWabbit
       bin_str = File.binread(filename)
       model_data = ::FFI::MemoryPointer.new(:char, bin_str.bytesize)
       model_data.put_bytes(0, bin_str)
-      @handle = FFI.VW_InitializeWithModel(param_str, model_data, bin_str.bytesize)
+      @handle = FFI.VW_InitializeWithModel(param_str(@params), model_data, bin_str.bytesize)
       nil
     end
 
@@ -59,12 +59,12 @@ module VowpalWabbit
 
     # TODO clean-up handle
     def handle
-      @handle ||= FFI.VW_InitializeA(param_str)
+      @handle ||= FFI.VW_InitializeA(param_str(@params))
     end
 
-    def param_str
+    def param_str(params)
       args =
-        @params.map do |k, v|
+        params.map do |k, v|
           check_param(k.to_s)
           check_param(v.to_s)
 
@@ -108,35 +108,41 @@ module VowpalWabbit
       end
     end
 
-    # TODO support compressed files
     def each_example(x, y = nil)
-      each_line(x, y) do |line|
-        example = FFI.VW_ReadExampleA(handle, line)
-        yield example
-        FFI.VW_FinishExample(handle, example)
+      if x.is_a?(String)
+        raise ArgumentError, "Cannot pass y with file" if y
+
+        file_handle = FFI.VW_InitializeA(param_str(data: x, quiet: true))
+        FFI.VW_StartParser(file_handle)
+        loop do
+          example = FFI.VW_GetExample(file_handle)
+          break if example.read_pointer.null?
+          yield example
+          FFI.VW_FinishExample(file_handle, example)
+        end
+        FFI.VW_EndParser(file_handle)
+        FFI.VW_Finish(file_handle)
+      else
+        each_line(x, y) do |line|
+          example = FFI.VW_ReadExampleA(handle, line)
+          yield example
+          FFI.VW_FinishExample(handle, example)
+        end
       end
     end
 
     def each_line(x, y)
-      if x.is_a?(String)
-        raise ArgumentError, "Cannot pass y with file" if y
+      x = x.to_a
+      if y
+        y = y.to_a
+        raise ArgumentError, "x and y must have same size" if x.size != y.size
+      end
 
-        File.foreach(x) do |line|
-          yield line
-        end
-      else
-        x = x.to_a
-        if y
-          y = y.to_a
-          raise ArgumentError, "x and y must have same size" if x.size != y.size
-        end
-
-        x.zip(y || []) do |xi, yi|
-          if xi.is_a?(String)
-            yield xi
-          else
-            yield "#{yi} 1 | #{xi.map.with_index { |v, i| "#{i}:#{v}" }.join(" ")}"
-          end
+      x.zip(y || []) do |xi, yi|
+        if xi.is_a?(String)
+          yield xi
+        else
+          yield "#{yi} 1 | #{xi.map.with_index { |v, i| "#{i}:#{v}" }.join(" ")}"
         end
       end
     end

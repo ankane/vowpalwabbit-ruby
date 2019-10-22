@@ -49,6 +49,14 @@ class VowpalWabbitTest < Minitest::Test
     assert_equal 0.5, model.score("test/support/classifier.txt")
   end
 
+  def test_compressed_file
+    model = VowpalWabbit::Regressor.new(l: 100)
+    assert_nil model.fit("test/support/regressor.txt.gz")
+    assert_in_delta 0.3333333432674408, model.intercept
+    assert_equal [1.0, 2.0, 3.0, 4.0], model.predict("test/support/regressor.txt.gz")
+    assert_equal 1.0, model.score("test/support/regressor.txt.gz")
+  end
+
   def test_bandit
     x_train = [
       "1:2:0.4 | a c",
