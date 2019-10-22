@@ -109,6 +109,7 @@ module VowpalWabbit
     end
 
     def each_example(x, y = nil)
+      # path to a file
       if x.is_a?(String)
         raise ArgumentError, "Cannot pass y with file" if y
 
@@ -123,26 +124,23 @@ module VowpalWabbit
         FFI.VW_EndParser(file_handle)
         FFI.VW_Finish(file_handle)
       else
-        each_line(x, y) do |line|
+        x = x.to_a
+        if y
+          y = y.to_a
+          raise ArgumentError, "x and y must have same size" if x.size != y.size
+        end
+
+        x.zip(y || []) do |xi, yi|
+          line =
+            if xi.is_a?(String)
+              xi
+            else
+              "#{yi} 1 | #{xi.map.with_index { |v, i| "#{i}:#{v}" }.join(" ")}"
+            end
+
           example = FFI.VW_ReadExampleA(handle, line)
           yield example
           FFI.VW_FinishExample(handle, example)
-        end
-      end
-    end
-
-    def each_line(x, y)
-      x = x.to_a
-      if y
-        y = y.to_a
-        raise ArgumentError, "x and y must have same size" if x.size != y.size
-      end
-
-      x.zip(y || []) do |xi, yi|
-        if xi.is_a?(String)
-          yield xi
-        else
-          yield "#{yi} 1 | #{xi.map.with_index { |v, i| "#{i}:#{v}" }.join(" ")}"
         end
       end
     end
