@@ -93,7 +93,7 @@ Data can be an array of arrays
 [[1, 2, 3], [4, 5, 6]]
 ```
 
-Or a Numo NArray [master]
+Or a Numo NArray
 
 ```ruby
 Numo::DFloat.new(3, 2).seq
@@ -118,7 +118,11 @@ model.predict("train.txt")
 model.score("train.txt")
 ```
 
-Files can be compressed [master]
+Files can be compressed
+
+```ruby
+model.fit("train.txt.gz")
+```
 
 Read more about the [input format](https://github.com/VowpalWabbit/vowpal_wabbit/wiki/Input-format)
 
