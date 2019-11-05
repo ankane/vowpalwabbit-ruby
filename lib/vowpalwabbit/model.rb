@@ -41,8 +41,9 @@ module VowpalWabbit
       output_data = Fiddle::Pointer.malloc(Fiddle::SIZEOF_VOIDP)
       output_size = Fiddle::Pointer.malloc(Fiddle::SIZEOF_SIZE_T)
       FFI.VW_CopyModelData(handle, buffer_handle, output_data, output_size)
-      pack_format = Fiddle::PackInfo::PACK_MAP[Fiddle::TYPE_SIZE_T]
-      bin_str = output_data.ptr.to_s(output_size[0, output_size.size].unpack1(pack_format))
+      fmt = Fiddle::PackInfo::PACK_MAP[Fiddle::TYPE_SIZE_T]
+      bin_size = output_size[0, output_size.size].unpack1(fmt)
+      bin_str = output_data.ptr[0, bin_size]
       FFI.VW_FreeIOBuf(buffer_handle.ptr)
       File.binwrite(filename, bin_str)
       nil
