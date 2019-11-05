@@ -11,7 +11,7 @@ module VowpalWabbit
       raise LoadError, "Could not find Vowpal Wabbit"
     end
 
-    # fiddler doesn't like void
+    # fiddle doesn't like void
     typealias "void", "void*"
 
     typealias "VW_HANDLE", "void*"
