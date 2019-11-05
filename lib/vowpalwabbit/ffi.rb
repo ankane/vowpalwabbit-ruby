@@ -11,12 +11,12 @@ module VowpalWabbit
       raise LoadError, "Could not find Vowpal Wabbit"
     end
 
-    typealias "VW_HANDLE", "void**"
-    typealias "VW_EXAMPLE", "void**"
-    typealias "VW_LABEL", "void**"
-    typealias "VW_FEATURE_SPACE", "void**"
-    typealias "VW_FEATURE", "void**"
-    typealias "VW_IOBUF", "void**"
+    typealias "VW_HANDLE", "void*"
+    typealias "VW_EXAMPLE", "void*"
+    typealias "VW_LABEL", "void*"
+    typealias "VW_FEATURE_SPACE", "void*"
+    typealias "VW_FEATURE", "void*"
+    typealias "VW_IOBUF", "void*"
 
     # https://github.com/VowpalWabbit/vowpal_wabbit/blob/master/vowpalwabbit/vwdll.h
     # keep same order
@@ -41,7 +41,7 @@ module VowpalWabbit
     extern "float VW_CALLING_CONV VW_GetInitial(VW_EXAMPLE e)"
     extern "float VW_CALLING_CONV VW_GetPrediction(VW_EXAMPLE e)"
     extern "float VW_CALLING_CONV VW_GetCostSensitivePrediction(VW_EXAMPLE e)"
-    extern "void** VW_CALLING_CONV VW_GetMultilabelPredictions(VW_EXAMPLE e, size_t* plen)"
+    extern "void* VW_CALLING_CONV VW_GetMultilabelPredictions(VW_EXAMPLE e, size_t* plen)"
     extern "float VW_CALLING_CONV VW_GetTopicPrediction(VW_EXAMPLE e, size_t i)"
     extern "float VW_CALLING_CONV VW_GetActionScore(VW_EXAMPLE e, size_t i)"
     extern "size_t VW_CALLING_CONV VW_GetActionScoreLength(VW_EXAMPLE e)"
