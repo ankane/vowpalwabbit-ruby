@@ -1,5 +1,5 @@
 # dependencies
-require "ffi"
+require "fiddle/import"
 
 # modules
 require "vowpalwabbit/model"
@@ -13,7 +13,7 @@ module VowpalWabbit
   class << self
     attr_accessor :ffi_lib
   end
-  self.ffi_lib = ["vw_c_wrapper"]
+  self.ffi_lib = ["libvw_c_wrapper.so", "libvw_c_wrapper.dylib", "vw_c_wrapper.dll"]
 
   # friendlier error message
   autoload :FFI, "vowpalwabbit/ffi"

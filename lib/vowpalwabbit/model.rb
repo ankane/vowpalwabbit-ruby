@@ -37,20 +37,20 @@ module VowpalWabbit
     end
 
     def save_model(filename)
-      buffer_handle = ::FFI::MemoryPointer.new(:pointer)
-      output_data = ::FFI::MemoryPointer.new(:pointer)
-      output_size = ::FFI::MemoryPointer.new(:size_t)
+      buffer_handle = Fiddle::Pointer.malloc(Fiddle::SIZEOF_VOIDP)
+      output_data = Fiddle::Pointer.malloc(Fiddle::SIZEOF_VOIDP)
+      output_size = Fiddle::Pointer.malloc(Fiddle::SIZEOF_SIZE_T)
       FFI.VW_CopyModelData(handle, buffer_handle, output_data, output_size)
-      bin_str = output_data.read_pointer.read_string(output_size.read(:size_t))
-      FFI.VW_FreeIOBuf(buffer_handle.read_pointer)
+      pack_format = Fiddle::PackInfo::PACK_MAP[Fiddle::TYPE_SIZE_T]
+      bin_str = output_data.ptr.to_s(output_size[0, output_size.size].unpack1(pack_format))
+      FFI.VW_FreeIOBuf(buffer_handle.ptr)
       File.binwrite(filename, bin_str)
       nil
     end
 
     def load_model(filename)
       bin_str = File.binread(filename)
-      model_data = ::FFI::MemoryPointer.new(:char, bin_str.bytesize)
-      model_data.put_bytes(0, bin_str)
+      model_data = Fiddle::Pointer[bin_str]
       @handle = FFI.VW_InitializeWithModel(param_str(@params), model_data, bin_str.bytesize)
       nil
     end
@@ -117,7 +117,7 @@ module VowpalWabbit
         FFI.VW_StartParser(file_handle)
         loop do
           example = FFI.VW_GetExample(file_handle)
-          break if example.read_pointer.null?
+          break if example.ptr.null?
           yield example
           FFI.VW_FinishExample(file_handle, example)
         end
