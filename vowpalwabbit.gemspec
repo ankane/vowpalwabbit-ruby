@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.version       = VowpalWabbit::VERSION
   spec.summary       = "Vowpal Wabbit - fast online machine learning - for Ruby"
   spec.homepage      = "https://github.com/ankane/vowpalwabbit"
-  spec.license       = "MIT"
+  spec.license       = "BSD-3-Clause"
 
   spec.author        = "Andrew Kane"
   spec.email         = "andrew@chartkick.com"
