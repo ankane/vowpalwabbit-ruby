@@ -36,23 +36,33 @@ module VowpalWabbit
       coefs
     end
 
-    def save_model(filename)
+    def export_model
       buffer_handle = ::FFI::MemoryPointer.new(:pointer)
       output_data = ::FFI::MemoryPointer.new(:pointer)
       output_size = ::FFI::MemoryPointer.new(:size_t)
       FFI.VW_CopyModelData(handle, buffer_handle, output_data, output_size)
       bin_str = output_data.read_pointer.read_string(output_size.read(:size_t))
       FFI.VW_FreeIOBuf(buffer_handle.read_pointer)
+
+      bin_str
+    end
+
+    def save_model(filename)
+      bin_str = export_model
       File.binwrite(filename, bin_str)
+      nil
+    end
+
+    def import_model_from_text(bin_str)
+      model_data = ::FFI::MemoryPointer.new(:char, bin_str.bytesize)
+      model_data.put_bytes(0, bin_str)
+      @handle = FFI.VW_InitializeWithModel(param_str(@params), model_data, bin_str.bytesize)
       nil
     end
 
     def load_model(filename)
       bin_str = File.binread(filename)
-      model_data = ::FFI::MemoryPointer.new(:char, bin_str.bytesize)
-      model_data.put_bytes(0, bin_str)
-      @handle = FFI.VW_InitializeWithModel(param_str(@params), model_data, bin_str.bytesize)
-      nil
+      import_model_from_text(bin_str)
     end
 
     private
