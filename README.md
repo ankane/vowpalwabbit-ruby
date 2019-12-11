@@ -56,6 +56,22 @@ Load the model from a file
 model.load_model("model.bin")
 ```
 
+Export the model to string
+
+```ruby
+require 'base64'
+binary_string = model.export_model_to_binary_string
+safe_encoded_string = Base64.encode64(binary_string) #BETTER, BUT OPTIONAL
+```
+
+Import the model from string
+
+```ruby
+require 'base64'
+binary_string = Base64.decode64(safe_encoded_string) #BETTER, BUT OPTIONAL
+model = model.import_model_from_binary_string(binary_string)
+```
+
 Train online
 
 ```ruby
