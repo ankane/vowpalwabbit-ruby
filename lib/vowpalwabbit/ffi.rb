@@ -5,7 +5,7 @@ module VowpalWabbit
     begin
       ffi_lib VowpalWabbit.ffi_lib
     rescue LoadError => e
-      raise e if ENV["VOWPALWABBIT_DEBUG"]
+      raise e #if ENV["VOWPALWABBIT_DEBUG"]
       raise LoadError, "Could not find Vowpal Wabbit"
     end
 
