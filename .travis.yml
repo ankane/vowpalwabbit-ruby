@@ -1,23 +1,9 @@
-dist: xenial
+dist: bionic
 language: ruby
-rvm: 2.6.3
-before_install:
-  - export VOWPALWABBIT_VERSION=8.7.0
-  - ./test/ci/install_vowpalwabbit.sh
-  - export LD_LIBRARY_PATH=$HOME/vowpalwabbit/$VOWPALWABBIT_VERSION/build/vowpalwabbit:$LD_LIBRARY_PATH
-addons:
-  apt:
-    packages:
-    - libboost-dev
-    - libboost-program-options-dev
-    - libboost-system-dev
-    - libboost-thread-dev
-    - libboost-math-dev
-    - libboost-test-dev
+rvm: 2.6
 cache:
   bundler: true
-  directories:
-    - $HOME/vowpalwabbit
+before_script: bundle exec rake vendor:linux
 script: bundle exec rake test
 notifications:
   email:
