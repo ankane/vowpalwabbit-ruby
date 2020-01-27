@@ -2,8 +2,6 @@
 
 [Vowpal Wabbit](https://vowpalwabbit.org) - fast online machine learning - for Ruby
 
-:fire: Uses the C API for blazing performance
-
 [![Build Status](https://travis-ci.org/ankane/vowpalwabbit.svg?branch=master)](https://travis-ci.org/ankane/vowpalwabbit)
 
 ## Installation
