@@ -3,7 +3,7 @@ require_relative "lib/vowpalwabbit/version"
 Gem::Specification.new do |spec|
   spec.name          = "vowpalwabbit"
   spec.version       = VowpalWabbit::VERSION
-  spec.summary       = "Vowpal Wabbit - fast online machine learning - for Ruby"
+  spec.summary       = "Fast online machine learning for Ruby"
   spec.homepage      = "https://github.com/ankane/vowpalwabbit"
   spec.license       = "BSD-3-Clause"
 
