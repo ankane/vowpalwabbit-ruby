@@ -1,5 +1,6 @@
 BSD 3-Clause License
 
+Copyright (c) Microsoft Corp 2012-2014, Yahoo! Inc. 2007-2012, and many individual contributors
 Copyright (c) 2019, Andrew Kane
 All rights reserved.
 
