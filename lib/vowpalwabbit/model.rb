@@ -64,21 +64,21 @@ module VowpalWabbit
 
     def param_str(params)
       args =
-        params.map do |k, v|
+        params.flat_map do |k, v|
           check_param(k.to_s)
           check_param(v.to_s)
 
           if v == true
-            "--#{k}"
+            ["--#{k}"]
           elsif !v
-            nil
+            []
           elsif k.size == 1
-            "-#{k} #{v}"
+            ["-#{k}", v]
           else
-            "--#{k} #{v}"
+            ["--#{k}", v]
           end
         end
-      args.compact.join(" ")
+      args.join(" ")
     end
 
     def check_param(v)
