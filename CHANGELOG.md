@@ -1,4 +1,4 @@
-## 0.1.2 (unreleased)
+## 0.1.2 (2020-08-18)
 
 - Changed to BSD 3-Clause license to match Vowpal Wabbit
 - Fixed deprecation warning in Ruby 2.7
