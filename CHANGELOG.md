@@ -1,6 +1,7 @@
 ## 0.1.2 (unreleased)
 
 - Changed to BSD 3-Clause license to match Vowpal Wabbit
+- Fixed deprecation warning in Ruby 2.7
 
 ## 0.1.1 (2019-11-02)
 

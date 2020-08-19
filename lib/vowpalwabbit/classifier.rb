@@ -1,7 +1,7 @@
 module VowpalWabbit
   class Classifier < Model
     def initialize(**params)
-      super({loss_function: "logistic"}.merge(params))
+      super(loss_function: "logistic", **params)
     end
 
     def predict(x)
