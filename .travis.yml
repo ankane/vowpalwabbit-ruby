@@ -1,8 +1,8 @@
-dist: xenial
+dist: bionic
 language: ruby
-rvm: 2.6.3
+rvm: 2.7
 before_install:
-  - export VOWPALWABBIT_VERSION=8.7.0
+  - export VOWPALWABBIT_VERSION=8.8.1
   - ./test/ci/install_vowpalwabbit.sh
   - export LD_LIBRARY_PATH=$HOME/vowpalwabbit/$VOWPALWABBIT_VERSION/build/vowpalwabbit:$LD_LIBRARY_PATH
 addons:
