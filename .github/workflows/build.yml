@@ -1,0 +1,27 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+        bundler-cache: true
+    - name: Install Vowpal Wabbit
+      run: |
+        cd ~
+        git clone --recursive --branch $VOWPALWABBIT_VERSION https://github.com/VowpalWabbit/vowpal_wabbit.git
+        cd vowpal_wabbit
+        mkdir build
+        cd build
+        cmake ..
+        make
+      env:
+        VOWPALWABBIT_VERSION: 8.8.1
+    - run: sudo apt-get install libboost-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev libboost-math-dev libboost-test-dev
+    - run: |
+        export LD_LIBRARY_PATH=$HOME/vowpal_wabbit/build/vowpalwabbit:$LD_LIBRARY_PATH
+        bundle exec rake test
