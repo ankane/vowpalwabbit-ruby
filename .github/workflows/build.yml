@@ -17,7 +17,9 @@ jobs:
       with:
         path: ~/vowpal_wabbit
         key: ${{ runner.os }}-vowpalwabbit-${{ env.VOWPALWABBIT_VERSION }}
+      id: cache-vw
     - name: Install Vowpal Wabbit
+      if: steps.cache-vw.outputs.cache-hit != 'true'
       run: |
         cd ~
         git clone --recursive --branch $VOWPALWABBIT_VERSION https://github.com/VowpalWabbit/vowpal_wabbit.git
