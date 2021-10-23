@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = "vowpalwabbit"
   spec.version       = VowpalWabbit::VERSION
   spec.summary       = "Fast online machine learning for Ruby"
-  spec.homepage      = "https://github.com/ankane/vowpalwabbit"
+  spec.homepage      = "https://github.com/ankane/vowpalwabbit-ruby"
   spec.license       = "BSD-3-Clause"
 
   spec.author        = "Andrew Kane"

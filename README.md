@@ -1,8 +1,8 @@
-# Vowpal Wabbit
+# Vowpal Wabbit Ruby
 
 [Vowpal Wabbit](https://vowpalwabbit.org) - fast online machine learning - for Ruby
 
-[![Build Status](https://github.com/ankane/vowpalwabbit/workflows/build/badge.svg?branch=master)](https://github.com/ankane/vowpalwabbit/actions)
+[![Build Status](https://github.com/ankane/vowpalwabbit-ruby/workflows/build/badge.svg?branch=master)](https://github.com/ankane/vowpalwabbit-ruby/actions)
 
 ## Installation
 
@@ -126,22 +126,22 @@ Read more about the [input format](https://github.com/VowpalWabbit/vowpal_wabbit
 
 ## History
 
-View the [changelog](https://github.com/ankane/vowpalwabbit/blob/master/CHANGELOG.md)
+View the [changelog](https://github.com/ankane/vowpalwabbit-ruby/blob/master/CHANGELOG.md)
 
 ## Contributing
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
 
-- [Report bugs](https://github.com/ankane/vowpalwabbit/issues)
-- Fix bugs and [submit pull requests](https://github.com/ankane/vowpalwabbit/pulls)
+- [Report bugs](https://github.com/ankane/vowpalwabbit-ruby/issues)
+- Fix bugs and [submit pull requests](https://github.com/ankane/vowpalwabbit-ruby/pulls)
 - Write, clarify, or fix documentation
 - Suggest or add new features
 
 To get started with development:
 
 ```sh
-git clone https://github.com/ankane/vowpalwabbit.git
-cd vowpalwabbit
+git clone https://github.com/ankane/vowpalwabbit-ruby.git
+cd vowpalwabbit-ruby
 bundle install
 bundle exec rake test
 ```
