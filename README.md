@@ -15,7 +15,7 @@ brew install vowpal-wabbit
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem 'vowpalwabbit'
+gem "vowpalwabbit"
 ```
 
 ## Getting Started
