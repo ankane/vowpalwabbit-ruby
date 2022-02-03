@@ -17,4 +17,4 @@ jobs:
       run: sudo apt update && sudo apt install libvw0
     - if: ${{ startsWith(matrix.os, 'macos') }}
       run: brew install vowpal-wabbit
-    - run: VOWPALWABBIT_DEBUG=t bundle exec rake test
+    - run: bundle exec rake test
