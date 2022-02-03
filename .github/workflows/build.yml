@@ -2,31 +2,19 @@ name: build
 on: [push, pull_request]
 jobs:
   build:
-    runs-on: ubuntu-latest
-    env:
-      VOWPALWABBIT_VERSION: 9.0.1
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.1
         bundler-cache: true
-    - run: sudo apt-get install libboost-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev libboost-math-dev libboost-test-dev
-    - uses: actions/cache@v2
-      with:
-        path: ~/vowpal_wabbit
-        key: ${{ runner.os }}-vowpalwabbit-${{ env.VOWPALWABBIT_VERSION }}
-      id: cache-vw
-    - name: Install Vowpal Wabbit
-      if: steps.cache-vw.outputs.cache-hit != 'true'
-      run: |
-        cd ~
-        git clone --recursive --branch $VOWPALWABBIT_VERSION https://github.com/VowpalWabbit/vowpal_wabbit.git
-        cd vowpal_wabbit
-        mkdir build
-        cd build
-        cmake ..
-        make
-    - run: |
-        export LD_LIBRARY_PATH=$HOME/vowpal_wabbit/build/vowpalwabbit:$LD_LIBRARY_PATH
-        bundle exec rake test
+    - if: ${{ startsWith(matrix.os, 'ubuntu') }}
+      run: sudo apt update && sudo apt install libvw0
+    - if: ${{ startsWith(matrix.os, 'macos') }}
+      run: brew install vowpal-wabbit
+    - run: VOWPALWABBIT_DEBUG=t bundle exec rake test

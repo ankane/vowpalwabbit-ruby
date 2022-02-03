@@ -12,7 +12,13 @@ First, install the [Vowpal Wabbit C++ library](https://vowpalwabbit.org/start.ht
 brew install vowpal-wabbit
 ```
 
-Add this line to your application’s Gemfile:
+And for Ubuntu, use:
+
+```sh
+sudo apt install libvw0
+```
+
+Then add this line to your application’s Gemfile:
 
 ```ruby
 gem "vowpalwabbit"

@@ -1,3 +1,7 @@
+## 0.1.3 (unreleased)
+
+- Added support for Ubuntu package
+
 ## 0.1.2 (2020-08-18)
 
 - Changed to BSD 3-Clause license to match Vowpal Wabbit
