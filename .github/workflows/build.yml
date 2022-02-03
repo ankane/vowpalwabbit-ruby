@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      VOWPALWABBIT_VERSION: 8.11.0
+      VOWPALWABBIT_VERSION: 9.0.1
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
