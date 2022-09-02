@@ -2,6 +2,7 @@
 
 - Prefer `save` over `save_model`
 - Prefer `load` over `load_model`
+- Dropped support for Ruby < 2.7
 
 ## 0.1.3 (2022-02-02)
 
