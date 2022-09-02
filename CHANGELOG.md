@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2022-09-02)
 
 - Prefer `save` over `save_model`
 - Prefer `load` over `load_model`
