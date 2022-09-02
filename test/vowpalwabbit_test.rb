@@ -9,9 +9,8 @@ class VowpalWabbitTest < Minitest::Test
     assert_nil model.fit(x, y)
 
     tempfile = Tempfile.new("vowpal-wabbit")
-    assert_nil model.save_model(tempfile.path)
-    model = VowpalWabbit::Regressor.new
-    assert_nil model.load_model(tempfile.path)
+    assert_nil model.save(tempfile.path)
+    model = VowpalWabbit::Regressor.load(tempfile.path)
 
     assert_in_delta 0.3333333432674408, model.intercept
     assert_equal [1.0, 2.0, 3.0, 4.0], model.predict(x)
@@ -27,8 +26,7 @@ class VowpalWabbitTest < Minitest::Test
 
     tempfile = Tempfile.new("vowpal-wabbit")
     assert_nil model.save_model(tempfile.path)
-    model = VowpalWabbit::Classifier.new
-    assert_nil model.load_model(tempfile.path)
+    model = VowpalWabbit::Classifier.load(tempfile.path)
 
     assert_equal [-1, -1, -1, -1], model.predict(x)
     assert_equal 0.5, model.score(x, y)

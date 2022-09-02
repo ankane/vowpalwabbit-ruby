@@ -1,3 +1,8 @@
+## 0.2.0 (unreleased)
+
+- Prefer `save` over `save_model`
+- Prefer `load` over `load_model`
+
 ## 0.1.3 (2022-02-02)
 
 - Added support for Ubuntu package

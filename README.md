@@ -51,13 +51,13 @@ model.predict(x)
 Save the model to a file
 
 ```ruby
-model.save_model("model.bin")
+model.save("model.bin")
 ```
 
 Load the model from a file
 
 ```ruby
-model.load_model("model.bin")
+model = VowpalWabbit::Regressor.load("model.bin")
 ```
 
 Train online

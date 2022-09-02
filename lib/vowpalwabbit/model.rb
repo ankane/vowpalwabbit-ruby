@@ -46,6 +46,7 @@ module VowpalWabbit
       File.binwrite(filename, bin_str)
       nil
     end
+    alias_method :save, :save_model
 
     def load_model(filename)
       bin_str = File.binread(filename)
@@ -53,6 +54,12 @@ module VowpalWabbit
       model_data.put_bytes(0, bin_str)
       @handle = FFI.VW_InitializeWithModel(param_str(@params), model_data, bin_str.bytesize)
       nil
+    end
+
+    def self.load(filename)
+      model = new
+      model.load_model(filename)
+      model
     end
 
     private
