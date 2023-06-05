@@ -2,10 +2,10 @@
 require "ffi"
 
 # modules
-require "vowpalwabbit/model"
-require "vowpalwabbit/classifier"
-require "vowpalwabbit/regressor"
-require "vowpalwabbit/version"
+require_relative "vowpalwabbit/model"
+require_relative "vowpalwabbit/classifier"
+require_relative "vowpalwabbit/regressor"
+require_relative "vowpalwabbit/version"
 
 module VowpalWabbit
   class Error < StandardError; end
