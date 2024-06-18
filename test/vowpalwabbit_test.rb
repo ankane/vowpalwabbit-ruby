@@ -61,7 +61,7 @@ class VowpalWabbitTest < Minitest::Test
       "3:0:0.2 | b d",
       "4:1:0.5 | a b",
       "2:1:0.3 | a b c",
-      "3:1:0.7 | a d",
+      "3:1:0.7 | a d"
     ]
     x_test = [
       "| b c",
