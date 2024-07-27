@@ -2,7 +2,7 @@
 
 [Vowpal Wabbit](https://vowpalwabbit.org) - fast online machine learning - for Ruby
 
-[![Build Status](https://github.com/ankane/vowpalwabbit-ruby/workflows/build/badge.svg?branch=master)](https://github.com/ankane/vowpalwabbit-ruby/actions)
+[![Build Status](https://github.com/ankane/vowpalwabbit-ruby/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/vowpalwabbit-ruby/actions)
 
 ## Installation
 
