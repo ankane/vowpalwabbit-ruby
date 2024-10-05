@@ -9,7 +9,7 @@ module VowpalWabbit
       raise LoadError, "Could not find Vowpal Wabbit"
     end
 
-    # https://github.com/VowpalWabbit/vowpal_wabbit/blob/master/vowpalwabbit/vwdll.h
+    # https://github.com/VowpalWabbit/vowpal_wabbit/blob/master/vowpalwabbit/c_wrapper/include/vw/c_wrapper/vwdll.h
     # keep same order
 
     attach_function :VW_InitializeA, %i[string], :pointer
