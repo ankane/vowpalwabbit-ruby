@@ -89,7 +89,7 @@ module VowpalWabbit
     end
 
     def check_param(v)
-      raise ArgumentError, "Invalid parameter" if /[[:space:]]/.match(v)
+      raise ArgumentError, "Invalid parameter" if /[[:space:]]/.match?(v)
     end
 
     def predict_example(example)

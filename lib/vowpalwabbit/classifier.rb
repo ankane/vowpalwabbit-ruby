@@ -12,7 +12,7 @@ module VowpalWabbit
     def score(x, y = nil)
       y_pred, y = predict_for_score(x, y)
       y_pred.map! { |v| v >= 0 ? 1 : -1 }
-      y_pred.zip(y).select { |yp, yt| yp == yt }.count / y.count.to_f
+      y_pred.zip(y).count { |yp, yt| yp == yt } / y.count.to_f
     end
   end
 end
