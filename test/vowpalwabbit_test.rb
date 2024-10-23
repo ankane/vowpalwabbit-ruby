@@ -5,7 +5,7 @@ class VowpalWabbitTest < Minitest::Test
     x = [[1, 2], [3, 4], [5, 6], [7, 8]]
     y = [1, 2, 3, 4]
 
-    model = VowpalWabbit::Regressor.new(learning_rate: 100)
+    model = VowpalWabbit::Regressor.new(learning_rate: 100, power_t: 1)
     assert_nil model.fit(x, y)
 
     tempfile = Tempfile.new("vowpal-wabbit")
@@ -33,7 +33,7 @@ class VowpalWabbitTest < Minitest::Test
   end
 
   def test_regressor_file
-    model = VowpalWabbit::Regressor.new(learning_rate: 100)
+    model = VowpalWabbit::Regressor.new(learning_rate: 100, power_t: 1)
     assert_nil model.fit("test/support/regressor.txt")
     assert_in_delta 0.3333333432674408, model.intercept
     assert_equal [1.0, 2.0, 3.0, 4.0], model.predict("test/support/regressor.txt")
@@ -48,7 +48,7 @@ class VowpalWabbitTest < Minitest::Test
   end
 
   def test_compressed_file
-    model = VowpalWabbit::Regressor.new(l: 100)
+    model = VowpalWabbit::Regressor.new(l: 100, power_t: 1)
     assert_nil model.fit("test/support/regressor.txt.gz")
     assert_in_delta 0.3333333432674408, model.intercept
     assert_equal [1.0, 2.0, 3.0, 4.0], model.predict("test/support/regressor.txt.gz")
@@ -79,7 +79,7 @@ class VowpalWabbitTest < Minitest::Test
     x = Numo::DFloat.cast([[1, 2], [3, 4], [5, 6], [7, 8]])
     y = Numo::DFloat.cast([1, 2, 3, 4])
 
-    model = VowpalWabbit::Regressor.new(l: 100)
+    model = VowpalWabbit::Regressor.new(l: 100, power_t: 1)
     assert_nil model.fit(x, y)
     assert_in_delta 0.3333333432674408, model.intercept
     assert_equal [1.0, 2.0, 3.0, 4.0], model.predict(x)
