@@ -4,4 +4,4 @@ gemspec
 
 gem "rake"
 gem "minitest", ">= 5"
-gem "numo-narray", platform: :ruby
+gem "numo-narray", platform: :mri
