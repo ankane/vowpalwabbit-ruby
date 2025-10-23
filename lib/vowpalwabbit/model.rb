@@ -97,6 +97,7 @@ module VowpalWabbit
         FFI.VW_PredictCostSensitive(handle, example)
       else
         FFI.VW_Predict(handle, example)
+        FFI.VW_GetCostSensitivePrediction(example)
       end
     end
 

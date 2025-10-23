@@ -24,6 +24,8 @@ module VowpalWabbit
     attach_function :VW_GetExample, %i[pointer], :pointer
     attach_function :VW_FinishExample, %i[pointer pointer], :void
     attach_function :VW_GetLabel, %i[pointer], :float
+    attach_function :VW_GetPrediction, %i[pointer], :float
+    attach_function :VW_GetCostSensitivePrediction, %i[pointer], :float
     attach_function :VW_GetFeatureNumber, %i[pointer], :size_t
     attach_function :VW_GetFeatures, %i[pointer pointer pointer], :pointer
     attach_function :VW_HashSpaceA, %i[pointer string], :size_t
