@@ -14,7 +14,7 @@ jobs:
           ruby-version: "4.0"
           bundler-cache: true
       - if: ${{ startsWith(matrix.os, 'ubuntu') }}
-        run: sudo apt update && sudo apt install libvw0
+        run: sudo apt-get update && sudo apt-get install libvw0
       - if: ${{ startsWith(matrix.os, 'macos') }}
         run: brew install vowpal-wabbit
       - run: bundle exec rake test
