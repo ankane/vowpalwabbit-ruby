@@ -52,7 +52,7 @@ module VowpalWabbit
       bin_str = File.binread(filename)
       model_data = ::FFI::MemoryPointer.new(:char, bin_str.bytesize)
       model_data.put_bytes(0, bin_str)
-      @handle = FFI.VW_InitializeWithModel(param_str(@params), model_data, bin_str.bytesize)
+      @handle = wrap_handle(FFI.VW_InitializeWithModel(param_str(@params), model_data, bin_str.bytesize))
       nil
     end
 
@@ -64,9 +64,12 @@ module VowpalWabbit
 
     private
 
-    # TODO clean-up handle
     def handle
-      @handle ||= FFI.VW_InitializeA(param_str(@params))
+      @handle ||= wrap_handle(FFI.VW_InitializeA(param_str(@params)))
+    end
+
+    def wrap_handle(handle)
+      ::FFI::AutoPointer.new(handle, FFI.method(:VW_Finish))
     end
 
     def param_str(params)
@@ -120,16 +123,21 @@ module VowpalWabbit
       if x.is_a?(String)
         raise ArgumentError, "Cannot pass y with file" if y
 
-        file_handle = FFI.VW_InitializeA(param_str(data: x, quiet: true))
+        file_handle = wrap_handle(FFI.VW_InitializeA(param_str(data: x, quiet: true)))
         FFI.VW_StartParser(file_handle)
-        loop do
-          example = FFI.VW_GetExample(file_handle)
-          break if example.read_pointer.null?
-          yield example
-          FFI.VW_FinishExample(file_handle, example)
+        begin
+          loop do
+            example = FFI.VW_GetExample(file_handle)
+            begin
+              break if example.read_pointer.null?
+              yield example
+            ensure
+              FFI.VW_FinishExample(file_handle, example)
+            end
+          end
+        ensure
+          FFI.VW_EndParser(file_handle)
         end
-        FFI.VW_EndParser(file_handle)
-        FFI.VW_Finish(file_handle)
       else
         x = x.to_a
         if y
@@ -146,8 +154,11 @@ module VowpalWabbit
             end
 
           example = FFI.VW_ReadExampleA(handle, line)
-          yield example
-          FFI.VW_FinishExample(handle, example)
+          begin
+            yield example
+          ensure
+            FFI.VW_FinishExample(handle, example)
+          end
         end
       end
     end
