@@ -4,5 +4,5 @@ gemspec
 
 gem "rake"
 gem "minitest"
-gem "numo-narray", platform: :mri
+gem "numo-narray-alt", platform: :mri
 gem "ruby_memcheck"
