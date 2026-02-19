@@ -8,18 +8,18 @@ jobs:
         os: [ubuntu-latest] # macos-latest requires large boost download
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "4.0"
           bundler-cache: true
-      - if: ${{ startsWith(matrix.os, 'ubuntu') }}
+      - if: ${{ runner.os == 'Linux' }}
         run: sudo apt-get update && sudo apt-get install libvw0
-      - if: ${{ startsWith(matrix.os, 'macos') }}
+      - if: ${{ runner.os == 'macOS' }}
         run: brew install vowpal-wabbit
       - run: bundle exec rake test
 
-      - if: ${{ startsWith(matrix.os, 'ubuntu') }}
+      - if: ${{ runner.os == 'Linux' }}
         run: |
           sudo apt-get update && sudo apt-get install valgrind
           bundle exec rake test:valgrind
