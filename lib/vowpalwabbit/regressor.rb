@@ -4,8 +4,8 @@ module VowpalWabbit
       y_pred, y = predict_for_score(x, y)
 
       # r2
-      sse = y_pred.zip(y).map { |yp, yt| (yp - yt) ** 2 }.sum
-      sst = y.map { |yi| yi ** 2 }.sum - (y.sum ** 2) / y.size
+      sse = y_pred.zip(y).sum { |yp, yt| (yp - yt) ** 2 }
+      sst = y.sum { |yi| yi ** 2 } - (y.sum ** 2) / y.size
       1 - sse / sst
     end
 
